@@ -1,0 +1,22 @@
+﻿@page "/"
+@inject IConfiguration Configuration
+@inject NavigationManager NavigationManager
+@inject IRespondentService RespondentService
+@inject IQuestionService QuestionService
+@inject ILocalStorageService LocalStorageService
+@inject IJSRuntime js
+
+@if (questions != null && questions.Any())
+{
+
+    <div class="form-group">
+        <div class="input-group col-md-8">
+            <input type="text" class="form-control" maxlength="255" disabled
+                   @bind="questions[0].Name">
+            <button class="btn btn-info" @onclick="@(async () => await DoExamination(questions[0].Id))">
+                Do an examination
+            </button>
+        </div>
+    </div>
+
+}

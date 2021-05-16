@@ -1,0 +1,140 @@
+﻿<h3 class="font-weight-bold">Modify Examination</h3>
+@page "/ModifyExamination"
+@inject IConfiguration Configuration
+@inject NavigationManager NavigationManager
+@inject IQuestionService QuestionService
+@inject IDropDownService DropDownService
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Modify</li>
+    </ol>
+</nav>
+
+<label class="font-weight-bold">Question name</label>
+
+<div class="input-group form-row">
+    <div class=" col-md-12">
+        <input type="text" class="form-control" maxlength="255"
+               @bind="QuestionData.Name">
+    </div>
+</div>
+<br />
+<label class="font-weight-bold">Answer name</label>
+
+<div class="input-group form-row">
+    <div class="input-group col-md-6">
+        <input type="text" class="form-control" maxlength="255"
+               @bind="AnswerTemp.Name">
+    </div>
+</div>
+
+<br />
+<label class="font-weight-bold">End examination keyword</label>
+
+<div class="input-group form-row">
+    <div class="input-group col-md-6">
+        <input type="text" class="form-control" maxlength="255"
+               @bind="AnswerTemp.EndAnswer">
+    </div>
+    <div class="input-group col-md-4">
+        <label>Please input end of answer keyword with , if end more than 1</label>
+    </div>
+</div>
+
+<br />
+<label class="font-weight-bold">Require?</label>
+
+<div class="input-group form-row">
+    <div class="input-group col-md-6">
+        <input type="checkbox"
+               id="customCheck1"
+               @bind="AnswerTemp.IsRequired">
+        <label for="customCheck1">Required to answer</label>
+
+    </div>
+</div>
+
+<br />
+
+<label class="font-weight-bold">Answer Type</label>
+
+<div class="input-group form-row">
+    <div class="form-group col-md-6">
+        <select @bind="AnswerTemp.AnswerType " id="answerTypeId" class="form-control">
+            @foreach (Enums.AnswerType ansType in Enum.GetValues(typeof(Enums.AnswerType)))
+            {
+                <option value="@(ansType)">@ansType.ToString()</option>
+            }
+        </select>
+    </div>
+</div>
+
+@if (AnswerTemp.AnswerType == Enums.AnswerType.DropDown)
+{
+    <label>Please select drop down topic</label>
+
+    <div class="input-group form-row">
+        <div class="form-group col-md-4">
+            <select @bind="AnswerTemp.DropDownId" id="drpDown" class="form-control">
+                <option value="-1" disabled>-</option>
+                @foreach (var dropDown in DropDownList)
+                {
+                    <option value="@(dropDown.Id)">@dropDown.Name</option>
+                }
+            </select>
+        </div>
+
+    </div>
+}
+
+<br />
+<div class="input-group form-row">
+    <div class="input-group col-md-6">
+        <button class="btn btn-primary" @onclick="@(async () => await AddToList())">Add / Update Answers</button>
+    </div>
+</div>
+<br />
+<br />
+@for (int i = 0; i < QuestionData.Answers.Count; i++)
+{
+    int running = i;
+    <div class="form-group">
+        <div class="input-group col-md-8">
+            <input type="text" class="form-control" maxlength="255"
+                   @bind="QuestionData.Answers[running].Name">
+            <button class="btn btn-danger" @onclick="@(async () => await RemoveFromList(QuestionData.Answers[running]))">Remove</button>
+            <button class="btn btn-warning" @onclick="@(async () => await ModifyThisAnswer(running))">Modify</button>
+        </div>
+    </div>
+}
+
+<button class="btn btn-primary text-center" @onclick="@(async () => await Upsert())">
+    Save
+</button>
+<button class="btn btn-warning text-center" @onclick="@(async () => await Clear())">
+    Clear
+</button>
+
+<br />
+<br />
+<br />
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">List</li>
+    </ol>
+</nav>
+
+
+@for (int i = 0; i < QuestionList.Count; i++)
+{
+    int running = i;
+    <div class="form-group">
+        <div class="input-group col-md-8">
+            <input type="text" class="form-control" maxlength="255" disabled
+                   @bind="QuestionList[running].Name">
+            <button class="btn btn-warning" @onclick="@(async () => await GetQuestionById(QuestionList[running].Id))">Select to update</button>
+            <button class="btn btn-danger" @onclick="@(async () => await Delete(QuestionList[running].Id))">Delete question</button>
+        </div>
+    </div>
+}

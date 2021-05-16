@@ -1,0 +1,21 @@
+﻿<button class="btn btn-success text-center" @onclick="@(async () =>   Confirm())">
+    Confirm
+</button>
+<button class="btn btn-warning text-center" @onclick="@(async () =>   Cancel())">
+    Cancel
+</button>
+@code {
+    [CascadingParameter] BlazoredModalInstance ModalInstance { get; set; }
+
+
+
+    void Confirm()
+    {
+        ModalInstance.CloseAsync(ModalResult.Ok(true));
+    }
+
+    void Cancel()
+    {
+        ModalInstance.CancelAsync();
+    }
+}

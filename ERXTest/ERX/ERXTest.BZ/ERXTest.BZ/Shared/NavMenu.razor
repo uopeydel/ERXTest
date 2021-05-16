@@ -1,0 +1,64 @@
+﻿@implements IDisposable
+@inject NavigationManager NavigationManager
+<div class="top-row pl-4 navbar navbar-dark">
+
+</div>
+
+<div>
+    <ul class="nav flex-column">
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
+                <span class="oi oi-text" aria-hidden="true"></span>Examination List
+            </NavLink>
+        </li>
+        @*<li class="nav-item px-3">
+                <NavLink class="nav-link" href="Examination/{questionId}" Match="NavLinkMatch.All"  @onclick:preventDefault >
+                    <span class="oi oi-text" aria-hidden="true"></span>Examination
+                </NavLink>
+            </li>*@
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="Respondent" Match="NavLinkMatch.All">
+                <span class="oi oi-info" aria-hidden="true"></span>Respondent
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="ModifyDropdown " Match="NavLinkMatch.All">
+                <span class="oi oi-vertical-align-center" aria-hidden="true"></span>Modify dropdown
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="ModifyExamination" Match="NavLinkMatch.All">
+                <span class="oi oi-ellipses" aria-hidden="true"></span>Modify examination
+            </NavLink>
+        </li>
+    </ul>
+</div>
+
+@code {
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        NavigationManager.LocationChanged += async (s, e) => { await LocationChanged(s, e); };
+        base.OnInitialized();
+    }
+
+    protected override async void OnInitialized()
+    {
+    }
+
+    async Task LocationChanged(object Question, LocationChangedEventArgs e)
+    {
+        string navigationMethod = e.IsNavigationIntercepted ? "HTML" : "code";
+        System.Diagnostics.Debug.WriteLine($"Notified of navigation via {navigationMethod} to {e.Location}");
+
+    }
+
+    void IDisposable.Dispose()
+    {
+        // Unsubscribe from the event when our component is disposed
+        NavigationManager.LocationChanged -= async (s, e) => { await LocationChanged(s, e); };
+    }
+}
+

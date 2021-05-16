@@ -1,0 +1,14 @@
+docker build --pull -t testnet5 -f Dockerfile  .
+
+docker run -it -d -p 7000:80 --name serverapptest testnet5
+-- --rm
+docker save testnet5:latest > testnet5.tar
+docker load -i testnet5.tar
+
+
+docker save testnet5:latest | gzip -c > testnet5.tgz
+docker load -i testnet5.tgz
+ 
+ docker network connect simple-network serverapptest
+ docker network connect simple-network webapp
+   docker network inspect simple-network

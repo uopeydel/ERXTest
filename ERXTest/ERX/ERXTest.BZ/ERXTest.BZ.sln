@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERXTest.BZ", "ERXTest.BZ\ERXTest.BZ.csproj", "{77705211-E2E9-4F06-A2AB-47C676A7F8D5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERXTest.Server", "..\ERXTest.Server\ERXTest.Server\ERXTest.Server.csproj", "{6582480F-0BB1-416A-9E98-B87776BBDCBF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERXTest.Shared", "..\ERXTest.Shared\ERXTest.Shared.csproj", "{EB75085F-A02D-4774-8C7B-0836782EA124}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2C1D587D-74D3-4225-BA75-500AF6F2396C}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\BSPublishfile_Local_Server\docker BackEnd command.txt = ..\..\BSPublishfile_Local_Server\docker BackEnd command.txt
+		..\..\BZPublishfile_Local\docker frontend command.txt = ..\..\BZPublishfile_Local\docker frontend command.txt
+		..\..\BSPublishfile_Local_Server\Dockerfile = ..\..\BSPublishfile_Local_Server\Dockerfile
+		..\..\BZPublishfile_Local\Dockerfile = ..\..\BZPublishfile_Local\Dockerfile
+		..\..\BZPublishfile_Local\nginx.conf = ..\..\BZPublishfile_Local\nginx.conf
+		..\..\README.md = ..\..\README.md
+		..\..\BZPublishfile_Local\start.sh = ..\..\BZPublishfile_Local\start.sh
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77705211-E2E9-4F06-A2AB-47C676A7F8D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77705211-E2E9-4F06-A2AB-47C676A7F8D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77705211-E2E9-4F06-A2AB-47C676A7F8D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77705211-E2E9-4F06-A2AB-47C676A7F8D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6582480F-0BB1-416A-9E98-B87776BBDCBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6582480F-0BB1-416A-9E98-B87776BBDCBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6582480F-0BB1-416A-9E98-B87776BBDCBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6582480F-0BB1-416A-9E98-B87776BBDCBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB75085F-A02D-4774-8C7B-0836782EA124}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB75085F-A02D-4774-8C7B-0836782EA124}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB75085F-A02D-4774-8C7B-0836782EA124}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB75085F-A02D-4774-8C7B-0836782EA124}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0380CDE8-A622-4C9F-B3AE-6BAD1FB213B1}
+	EndGlobalSection
+EndGlobal

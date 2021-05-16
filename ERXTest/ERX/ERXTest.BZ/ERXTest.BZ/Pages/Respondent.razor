@@ -1,0 +1,28 @@
+﻿<h3>Respondent</h3>
+@page "/Respondent"
+@inject IConfiguration Configuration
+@inject NavigationManager NavigationManager
+@inject IRespondentService RespondentService
+@inject IQuestionService QuestionService
+@inject IJSRuntime js
+
+
+
+@if (responders != null && responders.Any())
+{
+
+    for (int i = 0; i < responders.Count; i++)
+    {
+        int running = i;
+        <div class="form-group">
+            <div class="input-group col-md-8">
+                <input type="text" class="form-control" maxlength="255" disabled
+                       @bind="responders[running]">
+                <button class="btn btn-info" @onclick="@(async () => await RequestReport(responders[running]))">
+                    Download
+                </button>
+            </div>
+        </div>
+    }
+
+}

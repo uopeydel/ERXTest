@@ -1,0 +1,70 @@
+﻿<h3 class="font-weight-bold">Modify Dropdown</h3>
+@page "/ModifyDropdown"
+@inject IConfiguration Configuration
+@inject NavigationManager NavigationManager
+@inject IDropDownService DropDownService
+
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Modify</li>
+    </ol>
+</nav>
+
+<label class="font-weight-bold">Drop down name</label>
+<div class=" col-md-12">
+    <input type="text" class="form-control" maxlength="255"
+           @bind="DropDownItemData.Name">
+</div>
+<label class="font-weight-bold">Add dropdown item to list</label>
+<div class="input-group col-md-10">
+    <input type="text" class="form-control" maxlength="255"
+           @bind="NameTemp">
+
+
+</div>
+<br />
+<button class="btn btn-primary" @onclick="@(async () => await AddToList())">Add / Update Drop down</button>
+<br /><br /><br />
+@for (int i = 0; i < DropDownItemData.DropDownItems.Count; i++)
+{
+    int running = i;
+    <div class="form-group">
+        <div class="input-group col-md-8">
+            <input type="text" class="form-control" maxlength="255"
+                   @bind="DropDownItemData.DropDownItems[running].Name">
+            <button class="btn btn-danger" @onclick="@(async () => await RemoveFromList(DropDownItemData.DropDownItems[running]))">Remove</button>
+        </div>
+    </div>
+}
+
+<br />
+<button class="btn btn-primary text-center" @onclick="@(async () => await Upsert())">
+    Save
+</button>
+<button class="btn btn-warning text-center" @onclick="@(async () => await Clear())">
+    Clear
+</button>
+<br />
+<br />
+<br />
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">List</li>
+    </ol>
+</nav>
+
+
+@for (int i = 0; i < DropDownList.Count; i++)
+{
+    int running = i;
+    <div class="form-group">
+        <div class="input-group col-md-8">
+            <input type="text" class="form-control" maxlength="255" disabled
+                   @bind="DropDownList[running].Name">
+            <button class="btn btn-warning" @onclick="@(async () => await DropDownItem(DropDownList[running].Id))">Select to update</button>
+        </div>
+    </div>
+}
+
+

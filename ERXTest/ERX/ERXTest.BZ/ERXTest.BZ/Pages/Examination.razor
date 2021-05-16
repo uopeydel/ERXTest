@@ -1,0 +1,54 @@
+﻿
+@page "/Examination/{questionId}"
+@inject IConfiguration Configuration
+@inject NavigationManager NavigationManager
+@inject IRespondentService RespondentService
+@inject IQuestionService QuestionService
+@inject ILocalStorageService LocalStorageService
+
+(@questionId) Examination @question.Name
+
+
+@for (int i = 0; i < question.Answers.Count; i++)
+{
+    <br />
+    var running = i;
+    <label class="font-weight-bold">@question.Answers[i].Name</label>
+    if (question.Answers[i].AnswerType == Enums.AnswerType.Text)
+    {
+        <div class=" col-md-12">
+            <input type="text" class="form-control" maxlength="255"
+                   @bind="answeredTemp[running].Answer">
+        </div>
+    }
+    else if (question.Answers[i].AnswerType == Enums.AnswerType.DateTime)
+    {
+        <RadzenDatePicker @bind-Value=@answeredTemp[running].dtPicker
+                          TValue="DateTime?"
+                          ShowTime="true"
+                          Change=@(args => OnDatetimePickerChange(args, answeredTemp[running].AnswerId.ToString(), "MM/dd/yyyy h:mm tt"))
+                          HourFormat="12" DateFormat="MM/dd/yyyy h:mm tt" />
+    }
+    else if (question.Answers[i].AnswerType == Enums.AnswerType.DropDown)
+    {
+        <div class="input-group form-row">
+            <div class="form-group col-md-6">
+                <select @bind="answeredTemp[running].Answer" id="answerTypeId" class="form-control">
+                    @foreach (var item in question.Answers[i].DropDown.DropDownItems)
+                    {
+                        <option value="@(item.Name)">@item.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+    }
+    <br />
+}
+
+@if (question.Answers.Any())
+{
+    <button class="btn btn-primary text-center" @onclick="@(async () => await SaveAnswered())">
+        Save
+    </button> 
+}
